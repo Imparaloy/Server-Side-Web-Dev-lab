@@ -35,6 +35,19 @@ app.get('/products', (req, res) => {
     });
 });
 
+app.post('/products', express.json(), (req, res) => {
+    const { name, price, discount, review_count, image_url } = req.body;
+    connection.query(
+        'INSERT INTO products (name, price, discount, review_count, image_url) VALUES (?, ?, ?, ?, ?)',
+        [name, price, discount, review_count, image_url],
+        (err, result) => {
+            if (err) return res.status(500).json({ error: err.message });
+            res.status(201).json({ id: result.insertId, message: 'Product created' }); 
+        }
+    );
+});
+
+
 app.get('/products/:id', (req, res) => {
     const id = Number(req.params.id);
     const sql = 'SELECT * FROM products WHERE id = ?';
