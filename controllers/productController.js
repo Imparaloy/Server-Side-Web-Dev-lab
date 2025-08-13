@@ -1,6 +1,12 @@
 const Product = require('../models/productModel.js');
 
 const productController = {
+        getProductsView: (req, res) => {
+    Product.getAll((err, results) => {
+        if (err) return res.status(500).send('Database error');
+        res.render('products', { products: results });
+    });
+    },
     getAllProducts: (req, res) => {
         Product.getAll((err, results) => {
             if (err) return res.status(500).json({ error: err.message });

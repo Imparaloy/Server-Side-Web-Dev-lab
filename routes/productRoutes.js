@@ -69,7 +69,7 @@ router.get('/products/:id', productController.getProductById);
  *       200:
  *         description: A list of matched products
  */
-router.get('/products/search/:keyword', productController.searchProducts);
+router.get('/products/search/:keyword', productController.searchProduct);
 /**
  * @swagger
  * /api/products:
@@ -132,7 +132,7 @@ router.put('/products/:id', productController.updateProduct);
  *       404:
  *         description: Product not found
  */
-router.delete('/products/:id', productController.deleteProduct);
+router.delete('/products/:id', productController.softDeleteProduct);
 /**
  * @swagger
  * /api/products/restore/{id}:
